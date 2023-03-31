@@ -12,6 +12,8 @@ const AllProducts = require('./assets/js/components/all-products.vue');
 const CreateProduct = require('./assets/js/components/create-product.vue');
 const EditProduct = require('./assets/js/components/edit-product.vue');
 const DeleteProduct = require('./assets/js/components/delete-product.vue');
+const BuyProduct = require('./assets/js/components/buy-product.vue');
+
 
 const routes = [
     {
@@ -33,6 +35,11 @@ const routes = [
         name: 'delete_product',
         path: '/products/delete/:id',
         component: DeleteProduct
+    },
+    {
+        name: 'buy_product',
+        path: '/products/buy/:id',
+        component: BuyProduct
     }
 ];
 var router = new VueRouter({ routes: routes, mode: 'history' });
