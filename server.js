@@ -31,7 +31,9 @@ app.get('/api/products', function(req, res) {
             console.error(err);
             process.exit(1);
         }
-        res.json(JSON.parse(data));
+        products = JSON.parse(data);
+        let prod_id = products.map(item => ({id: item.id, name: item.name}));
+        res.json(prod_id);
     });
 });
 
