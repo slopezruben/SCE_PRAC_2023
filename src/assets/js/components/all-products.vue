@@ -9,8 +9,8 @@
         </div>
         <div class="container">
             <div class="row">
-                    <div v-for="product_id in products" class="col-sm-6 col-lg-4 col-xs-12 text-center">
-                        <ProductCoin :id= product_id.id ></ProductCoin>
+                    <div v-for="product in products" class="col-sm-6 col-lg-4 col-xs-12 text-center">
+                        <ProductCoin :id=product.id ></ProductCoin>
                     </div>
             </div>
         </div>
@@ -53,7 +53,11 @@
                     this.products = this.originalProducts;
                     return;
                 }
-
+                //Va igual de rapido y no reregenera casillas
+                //this.products= this.products.filter((product) => product.name.toLowerCase().includes(this.productSearch.toLowerCase()));
+            
+                            
+                console.log(this.productSearch)
                 var searchedProducts = [];
                 for(var i = 0; i < this.originalProducts.length; i++)
                 {
@@ -63,9 +67,9 @@
                         searchedProducts.push(this.originalProducts[i]);
                     }
                 }
-
                 this.products = searchedProducts;
+            
             }
-        }
+        },
     }
 </script>
