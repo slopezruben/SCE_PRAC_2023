@@ -10,36 +10,20 @@
         <!--grid -->
         <div class="container">
             <div class="row">
-                    <div v-for="product in products" class="position-relative container col-xs-12 col-md-4 col-lg-3 rounded position-relative">
-                            <p class="position-absolute col-xs-8 col-lg-4 top-50 start-50">{{ product.name }}</p>
-                            <p class="position-absolute col-xs-4 col-lg-10 top-50 start-50">{{ product.price }}</p>
-                            <button class="position-absolute col-lg-2 top-50 start-50"> buy me</button>
-                </div>
+                    <div v-for="product in products" class="col-sm-6 col-lg-4 col-xs-12 text-center">
+                        <div class="card pb-xs-3" style="width: 18rem;">
+                            <img src="src/assets/img/bitcoin.png" class="card-img-top img-thumbnail" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <div class="card-text">{{ product.price }}</div>
+                                <a href="#" class="btn btn-primary">Buy Me</a>
+                                <router-link :to="{name: 'edit_product', params: { id: product.id }}" class="btn btn-primary">Edit</router-link>
+                                <router-link :to="{name: 'delete_product', params: { id: product.id }}" class="btn btn-danger">Delete</router-link> </div>
+                        </div>
+                    </div>
             </div>
         </div>
-        <!--fi grid-->
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Price</td>
-                <td>Actions</td>
-            </tr>
-            </thead>
-
-            <tbody>
-                <tr v-for="product in products">
-                    <td>{{ product.id }}</td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.price }}</td>
-                    <td>
-                        <router-link :to="{name: 'edit_product', params: { id: product.id }}" class="btn btn-primary">Edit</router-link>
-                        <router-link :to="{name: 'delete_product', params: { id: product.id }}" class="btn btn-danger">Delete</router-link>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <!--fi grid-->
     </div>
 </template>
 
