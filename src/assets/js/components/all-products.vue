@@ -17,7 +17,7 @@
     import ProductCoin from './product-coin.vue';
     import navigationBar from './navigation-bar.vue';
     export default{
-        data(){
+        data() {
             return{
                 products: [],
                 originalProducts: [],
@@ -71,8 +71,19 @@
             },
             sendToCart: function(product)
             {
-                this.cartList.push(product)
-                console.log(product.name)
+
+                let itemInCart = this.cartList.filter(productInCart => productInCart.id===product.id);
+    			let isItemInCart = itemInCart.length > 0;
+                
+                if (isItemInCart === false) {
+                    product['qty'] = 1
+                    this.cartList.push(product);
+                } else {
+                    console.log("AAAAAAAAAAAAAA")
+	    			itemInCart[0].qty = 10;
+			    }
+                
+                //console.log(product.name)
             }
         },
     }
