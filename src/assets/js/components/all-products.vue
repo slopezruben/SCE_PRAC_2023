@@ -5,7 +5,7 @@
         <p><router-link :to="{ name: 'create_product' }" class="btn btn-primary">Create Product</router-link></p>
         <div class="container">
             <div class="row">
-                    <div v-for="product in products" class="col-sm-6 col-lg-4 col-xs-12 text-center mb-3 mt-2">
+                    <div v-for="product in products" :key="product.id" class="col-sm-6 col-lg-4 col-xs-12 text-center mb-3 mt-2">
                         <ProductCoin @addProductToCart="sendToCart($event)" :id="product.id" ></ProductCoin>
                     </div>
             </div>

@@ -26,8 +26,8 @@ export default{
           product: function(){
             this.fetchProductData();
           }  
-        },**/
-
+        },
+**/
         computed: {
             name: function() {
                 return this.product.name
@@ -40,6 +40,7 @@ export default{
         created: function()
         {
             this.fetchProductData();
+	    setInterval(this.updateCoin, 10000)
         },
 
         methods: {
@@ -54,7 +55,15 @@ export default{
             },
             addToCart: function(){
                 this.$emit('addProductToCart', this.product)
-            }
+            },
+	    updateCoin: function(){
+	    console.log('ESTIC CRIDANT')
+	    	this.$http.put('http://localhost:3000/api/product/'+this.id).then((response) => {
+			this.product.price = response.body;
+		}, (response) => {
+		
+		});
+	    }
         }
     }
 

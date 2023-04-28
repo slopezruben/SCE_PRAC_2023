@@ -33,14 +33,14 @@
     import Notification from './notifications.vue';
 
     export default{
-        data(){
-            return{
-                product:{},
-                notifications:[]
+        data: function() {
+            return {
+                product: {},
+                notifications: []
             }
         },
 
-        created: function(){
+        mounted: function(){
             this.getProduct();
         },
 

@@ -25,6 +25,7 @@
                         </div>
                 </div>
                 <div class="modal-footer">
+                    <router-link  type="button" class="btn btn-default" data-bs-dismiss="modal" :to="{ name: 'create_product' }">BUY NOW</router-link>
                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

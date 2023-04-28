@@ -42,7 +42,8 @@ import ShoppingCart from './shopping-cart.vue';
     props: {
         cartList: []
     },
-    data() {
+    data: function() {
+    	return {};
     },
     methods: {
         searchProducts: function () {

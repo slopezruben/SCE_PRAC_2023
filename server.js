@@ -21,17 +21,18 @@ setInterval(function() {
         products = JSON.parse(data);
         for(var i = 0; i < products.length; i++)
         {
-            products[i]['price'] = (20 + parseFloat(products[i]['price'])).toFixed(2).toString()
+           products[i]['price'] = (20 + parseFloat(products[i]['price'])).toFixed(2).toString()
         }
+
         fs.writeFile(PRODUCTS_FILE, JSON.stringify(products, null, 4), function(err) {
         if (err) {
             console.error(err);
             process.exit(1);
         }
-        }) })
-   
-    }, 10000);
-
+        }); 
+    });
+    }, 15000);
+//
 // Additional middleware which will set headers that we need on each request.
 app.use(function(req, res, next) {
     // Set permissive CORS header - this allows this server to be used only as
@@ -77,6 +78,24 @@ app.get('/api/product/:id', function(req, res) {
             }
         }
     });
+});
+
+app.put('/api/product/:id', function(req, res) {
+    fs.readFile(PRODUCTS_FILE, function(err,data,products){
+        if (err){
+            console.log(err)
+            process.exit(1);
+        }
+        products = JSON.parse(data);
+
+        for(var i = 0; i < products.length; i++)
+        {
+            if(products[i]['id'] == req.params.id){
+		res.json(products[i]['price'])
+		break;
+	    }
+	}
+	});
 });
 
 app.post('/api/product/create', function(req, res) {
