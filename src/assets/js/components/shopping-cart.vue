@@ -16,16 +16,18 @@
                 <div class="modal-body">
                         <div>
                             <table class="table table-cart">
-                                <tr v-for="(item, index) in this.cartList">
+                                <tr v-for="item in this.cartList" :key="item.id">
                                     <td>{{ item.name }}</td>
-                                    <td class="text-right"> ${{ item.price }} | {{ item.qty }}</td>
+                                    <td class="text-right"> {{ item.qty }}</td>
                                     
                                 </tr>
                             </table>
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <router-link  type="button" class="btn btn-default" data-bs-dismiss="modal" :to="{ name: 'create_product' }">BUY NOW</router-link>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal" @click="$router.push({ name: 'edit_product', params: {id: 1} })">
+                        BUY NOW
+                    </button>
                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -37,18 +39,26 @@
 
 <script>
 export default{
+    data(){
+        return {
+        }
+    },
+
     props:{
-        cartList: []
+        cartList: [],
     },
     computed: {
         totalItems: function(){
-            let total = 0
-            for(const item in this.cartList){
-                console.log(item.name)
-                total += item.qty
+            var total = 0
+            for(let item in this.cartList){
+                let product = JSON.parse(JSON.stringify(this.cartList[item]))                
+                if(!isNaN(product.qty)){
+                    total += product.qty
+                }
             }
+            
             return total
-        }
+        },
     }
 }
 </script>

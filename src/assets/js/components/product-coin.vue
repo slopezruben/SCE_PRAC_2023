@@ -1,5 +1,5 @@
 <template>
-    <div class="card pb-xs-3" style="width: 18rem;">
+    <div class="card border-dark pb-xs-3" style="width: 18rem;">
         <img src="src/assets/img/bitcoin.png" class="card-img-top img-thumbnail" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{ this.name }}</h5>
@@ -21,13 +21,6 @@ export default{
                
             }
         },
-/**
-        watch: {
-          product: function(){
-            this.fetchProductData();
-          }  
-        },
-**/
         computed: {
             name: function() {
                 return this.product.name
@@ -40,7 +33,7 @@ export default{
         created: function()
         {
             this.fetchProductData();
-	    setInterval(this.updateCoin, 10000)
+	        setInterval(this.updateCoin, 10000)
         },
 
         methods: {
@@ -57,7 +50,6 @@ export default{
                 this.$emit('addProductToCart', this.product)
             },
 	    updateCoin: function(){
-	    console.log('ESTIC CRIDANT')
 	    	this.$http.put('http://localhost:3000/api/product/'+this.id).then((response) => {
 			this.product.price = response.body;
 		}, (response) => {

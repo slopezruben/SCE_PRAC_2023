@@ -4,8 +4,8 @@
         <h1>All Products</h1>
         <p><router-link :to="{ name: 'create_product' }" class="btn btn-primary">Create Product</router-link></p>
         <div class="container">
-            <div class="row">
-                    <div v-for="product in products" :key="product.id" class="col-sm-6 col-lg-4 col-xs-12 text-center mb-3 mt-2">
+            <div class="row row-cols-xs-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 ">
+                    <div v-for="product in products" :key="product.id" class="text-center mb-3 mt-2 ">
                         <ProductCoin @addProductToCart="sendToCart($event)" :id="product.id" ></ProductCoin>
                     </div>
             </div>
@@ -79,11 +79,11 @@
                     product['qty'] = 1
                     this.cartList.push(product);
                 } else {
-                    console.log("AAAAAAAAAAAAAA")
-	    			itemInCart[0].qty = 10;
+                    let index = this.cartList.indexOf(itemInCart[0]);
+                    let newItem = JSON.parse(JSON.stringify(itemInCart[0]));
+                    newItem.qty = 1 + itemInCart[0]['qty'];
+                    this.$set(this.cartList, index, newItem);
 			    }
-                
-                //console.log(product.name)
             }
         },
     }
