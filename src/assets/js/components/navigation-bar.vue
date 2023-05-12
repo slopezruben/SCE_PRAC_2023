@@ -27,7 +27,10 @@
         </ul>
 
         <div class="form-group">
-            <input type="text" name="search" v-model="productSearch" placeholder="Search products" class="form-control" v-on:keyup="searchProducts">
+            <input type="text" name="search" v-model="productSearch" list="searchOptions" placeholder="Search products" class="form-control" v-on:keyup="searchProducts"/>
+	    <datalist id="searchOptions">
+      		<option v-for="option in options" :value="option">{{ option }}</option>
+    	    </datalist>
         </div>
         <ShoppingCart :cartList="this.cartList"></ShoppingCart>
         </div>
@@ -43,15 +46,31 @@ import ShoppingCart from './shopping-cart.vue';
         cartList: []
     },
     data: function() {
-    	return {};
+    	return {
+		productSearch: "",
+		options: []
+
+	};
     },
     methods: {
         searchProducts: function () {
-            this.$emit("searchedProducts", this.productSearch);
+            	this.$emit("searchedProducts", this.productSearch);
+     		if (this.productSearch.length >= 1) {
+			$.ajax({
+			  url: 'http://localhost:3000/api/products/search/'+this.productSearch,
+			  type: 'GET',
+			  dataType: 'json',
+			  success: response => {
+			    this.options = response;
+			  },
+			  error: error => {
+			    console.log(error);
+			  }
+			});
+      		} else {
+        		this.options = [];
+      		}
         },
-        addToCart: function () {
-            console.log(this.cartList);
-        }
     },
     components: { ShoppingCart }
 }

@@ -25,7 +25,7 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal" @click="$router.push({ name: 'edit_product', params: {id: 1} })">
+                    <button type="button" v-if="totalItems > 0" class="btn btn-default" data-bs-dismiss="modal" @click="$router.push({ name: 'edit_product', params: {id: cartList.map(item => item.id).join(',')} })">
                         BUY NOW
                     </button>
                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>

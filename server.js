@@ -182,6 +182,32 @@ app.delete('/api/product/delete/:id', function(req, res) {
     });
 });
 
+app.get('/api/products/search/:term', function(req,res){
+    term = (req.params.term).toLowerCase();
+    fs.readFile(PRODUCTS_FILE, function(err, data) {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+        products = JSON.parse(data);
+	matchingProducts = []
+	for(var i = 0; i < products.length; i++)
+        {
+           if(products[i]['name'].toLowerCase().includes(term)){
+		   matchingProducts.push(products[i])
+	   }
+
+        }
+  	matchingNames = matchingProducts.map((product) => product.name);
+  	res.json(matchingNames);
+    });
+});
+
+app.post('/api/order/create/:ids', function(req, res) {
+	// 1. Busca los productos que correspondan con la lista de IDs
+	// 2. Genera un json tal que {id: {product1, product2}
+	// 3. Devuelve este JSON en la respuesta
+});
 
 app.listen(app.get('port'), function() {
     console.log('Server started: http://localhost:' + app.get('port') + '/');
