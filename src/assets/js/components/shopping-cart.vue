@@ -25,6 +25,7 @@
                         </div>
                 </div>
                 <div class="modal-footer">
+                    <paypal :amount="amount"></paypal>
                     <button type="button" v-if="totalItems > 0" class="btn btn-default" data-bs-dismiss="modal" @click="$router.push({ name: 'edit_product', params: {id: cartList.map(item => item.id).join(',')} })">
                         BUY NOW
                     </button>
@@ -38,9 +39,11 @@
 </template>
 
 <script>
+import Paypal from './Paypal.vue'
 export default{
     data(){
         return {
+            amount: 10
         }
     },
 
@@ -59,6 +62,7 @@ export default{
             
             return total
         },
-    }
+    },
+    components: {'paypal': Paypal}
 }
 </script>

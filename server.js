@@ -3,11 +3,14 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var paypal = require('paypal-rest-sdk');
+var cors = require('cors');
 
 var PRODUCTS_FILE = path.join(__dirname, 'src/assets/js/components/product-data.json');
 
 app.set('port', (process.env.PORT || 3000));
 
+app.use(cors())
 app.use('/', express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -57,7 +60,6 @@ app.get('/api/products', function(req, res) {
         res.json(prod_id);
     });
 });
-
 
 app.get('/api/product/:id', function(req, res) {
 
@@ -208,6 +210,54 @@ app.post('/api/order/create/:ids', function(req, res) {
 	// 2. Genera un json tal que {id: {product1, product2}
 	// 3. Devuelve este JSON en la respuesta
 });
+
+paypal.configure({
+    'mode': 'sandbox', //sandbox or live
+    'client_id': 'YOUR CLIENT ID',
+    'client_secret': 'YOUR CLEINT SECRET'
+  });
+  
+  // start payment process
+  //Comanda per generar el que vull comprar (peticio per comprar a paypal)
+  app.post('/checkout' , (req , res) => {
+      console.log(req.body);
+      var execute_payment_json = {
+        "payer_id": req.body.data.payerID,
+      };
+      const payment = {};
+      payment.amount = req.body.data.amount; //Aqui hauriem de fer que rebi la llista de id dels prod i agafar de la BD els preus i els gestoina per fer el preu total
+      const paymentID = req.body.data.paymentID;
+      paymentPaypal(paymentID, execute_payment_json, payment,(err, result) => {
+          if(err) {
+            res.statuts(400).json(JSON.stringify(err));
+          } else {
+            res.status(200).json(payment);
+          }
+      });
+  });
+  
+  
+  // helper functions
+  //Crida al backend de paypal (com una promise)
+  var paymentPaypal = (paymentID, execute_payment_json, payment, cb) => {
+      paypal.payment.execute(paymentID, execute_payment_json,(error, paymentLog) => {
+          if (error)
+          {
+              return cb(error);
+          }
+          else
+          {
+              // the server logic after successful payment
+              // here just print out the payment information to the console
+              payment.email = paymentLog.payer.payer_info.email;
+              payment.first_name = paymentLog.payer.payer_info.first_name;
+              payment.last_name = paymentLog.payer.payer_info.last_name;
+              console.log(payment);
+              cb(null, JSON.stringify(payment));
+         }
+      });
+  }
+
 
 app.listen(app.get('port'), function() {
     console.log('Server started: http://localhost:' + app.get('port') + '/');
