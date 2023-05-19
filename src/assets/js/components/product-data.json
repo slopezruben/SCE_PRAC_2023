@@ -2,26 +2,26 @@
     {
         "id": 3,
         "name": "Amazon Echo, Black",
-        "price": "7109.99"
+        "price": "11729.99"
     },
     {
         "id": 4,
         "name": "Fire Tablet, 7",
-        "price": "7007.49"
+        "price": "11627.49"
     },
     {
         "id": 5,
         "name": "Paperwhitefff",
-        "price": "7064.99"
+        "price": "11684.99"
     },
     {
         "id": 1,
         "name": "Fire Thing",
-        "price": "6992.99"
+        "price": "11612.99"
     },
     {
         "id": 2,
         "name": "Amazon Echo Dot",
-        "price": "7009.99"
+        "price": "11629.99"
     }
 ]

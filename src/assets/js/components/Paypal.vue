@@ -62,7 +62,7 @@ export default {
                 });
             }
             console.log(onAuthorize)
-            paypal.Button.render({onAuthorize, payment, env:'sandbox'}, '#paypal-button-container');
+            paypal.Button.render({onAuthorize, payment, env:'sandbox',commit:true, client}, '#paypal-button-container');
     }
 }
 </script>

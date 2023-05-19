@@ -9,13 +9,11 @@
                         <ProductCoin @addProductToCart="sendToCart($event)" :id="product.id" ></ProductCoin>
                     </div>
             </div>
-        <paypal :amount="amount"></paypal>
         </div>
     </div>
 </template>
 
 <script>
-    import Paypal from './Paypal.vue'
     import ProductCoin from './product-coin.vue';
     import navigationBar from './navigation-bar.vue';
     export default{
@@ -24,14 +22,12 @@
                 products: [],
                 originalProducts: [],
                 productSearch: '',
-                cartList: [],
-                amount: 10
+                cartList: []
             }
         },
         components: {
             ProductCoin,
             navigationBar,
-            'paypal': Paypal
         },
 
         created: function()

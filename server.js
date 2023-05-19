@@ -213,8 +213,8 @@ app.post('/api/order/create/:ids', function(req, res) {
 
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
-    'client_id': 'YOUR CLIENT ID',
-    'client_secret': 'YOUR CLEINT SECRET'
+    'client_id': 'AV8MPmd1b80NBdLxK32A86bO1vY-GxKk8Nqzgi0CYPeTuJ8SI3FCzks53EfX2hDvWOg0K4gMqLvD80GV',
+    'client_secret': ''
   });
   
   // start payment process
