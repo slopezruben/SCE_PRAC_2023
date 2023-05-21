@@ -25,8 +25,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <paypal v-if="totalItems > 0" :amount="amount"></paypal>
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close + {{totalPrice}}</button>
+                    <paypal v-if="totalItems > 0" :amount="total"></paypal>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close {{ totalPrice }}</button>
                 </div>
             </div>
         </div>
@@ -36,11 +36,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios, { formToJSON } from 'axios'
 import Paypal from './Paypal.vue'
 export default{
     data(){
         return {
+            total: 0
         }
     },
 
@@ -59,28 +60,27 @@ export default{
             
             return total
         },
-        totalPrice: function(){
+        totalPrice: function() {
+            this.responseValue()
+            return this.total
+        }
+    },
+    components: {'paypal': Paypal},
+    methods: {
+          async responseValue(){
             const listaTransformada = this.cartList.map(objeto => {
               return {
                 id: objeto.id,
                 qty: objeto.qty
               };
             });
-            var total = 0
-            // Realizar la solicitud al servidor
-            axios.post('http://localhost:3000/api/order/create', { lista: listaTransformada })
-              .then(response => {
-                // Obtener la suma de los precios de la respuesta
-                total = response.data.total;
-                console.log('Total:', "  + ", response.data.total);
-                return total
-                })
-              .catch(error => {
-                console.error(error);
-              });
-            return total
-        }
-    },
-    components: {'paypal': Paypal}
+            try {
+                const response = await axios.post('http://localhost:3000/api/order/create', { lista: listaTransformada })
+                this.total = response.data.total
+            } catch (error) {
+                console.error(error)
+            }
+            }
+    }
 }
 </script>
