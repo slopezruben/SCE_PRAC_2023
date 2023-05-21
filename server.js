@@ -205,10 +205,27 @@ app.get('/api/products/search/:term', function(req,res){
     });
 });
 
-app.post('/api/order/create/:ids', function(req, res) {
-	// 1. Busca los productos que correspondan con la lista de IDs
-	// 2. Genera un json tal que {id: {product1, product2}
-	// 3. Devuelve este JSON en la respuesta
+app.post('/api/order/create/', function(req, res) {
+    const lista = req.body.lista;
+
+    fs.readFile(PRODUCTS_FILE, 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error al leer el archivo de productos.');
+        return;
+      }
+
+    const products = JSON.parse(data);
+    let total = 0;
+    lista.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product && product.price) {
+          total += product.price * item.qty;
+        }
+      });
+  
+      res.json({ total });
+    });
 });
 
 paypal.configure({

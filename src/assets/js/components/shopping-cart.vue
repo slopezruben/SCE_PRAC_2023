@@ -25,11 +25,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <paypal :amount="amount"></paypal>
-                    <button type="button" v-if="totalItems > 0" class="btn btn-default" data-bs-dismiss="modal" @click="$router.push({ name: 'edit_product', params: {id: cartList.map(item => item.id).join(',')} })">
-                        BUY NOW
-                    </button>
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <paypal v-if="totalItems > 0" :amount="amount"></paypal>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close + {{totalPrice}}</button>
                 </div>
             </div>
         </div>
@@ -39,11 +36,11 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Paypal from './Paypal.vue'
 export default{
     data(){
         return {
-            amount: 10
         }
     },
 
@@ -62,6 +59,27 @@ export default{
             
             return total
         },
+        totalPrice: function(){
+            const listaTransformada = this.cartList.map(objeto => {
+              return {
+                id: objeto.id,
+                qty: objeto.qty
+              };
+            });
+            var total = 0
+            // Realizar la solicitud al servidor
+            axios.post('http://localhost:3000/api/order/create', { lista: listaTransformada })
+              .then(response => {
+                // Obtener la suma de los precios de la respuesta
+                total = response.data.total;
+                console.log('Total:', "  + ", response.data.total);
+                return total
+                })
+              .catch(error => {
+                console.error(error);
+              });
+            return total
+        }
     },
     components: {'paypal': Paypal}
 }

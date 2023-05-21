@@ -37,6 +37,7 @@ export default {
            let  client = {
                   sandbox: 'AV8MPmd1b80NBdLxK32A86bO1vY-GxKk8Nqzgi0CYPeTuJ8SI3FCzks53EfX2hDvWOg0K4gMqLvD80GV',
            }
+           console.log(typeof(this.amount))
            let  payment = (data, actions) => {
                 // Make a call to the REST api to create the payment
                 return actions.payment.create({
