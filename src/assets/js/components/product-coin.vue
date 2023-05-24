@@ -1,6 +1,6 @@
 <template>
     <div class="card border-dark pb-xs-3" style="width: 18rem;">
-        <img src="src/assets/img/bitcoin.png" class="card-img-top img-thumbnail" alt="...">
+        <img :src="this.imagesource" class="card-img-top img-thumbnail" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{ this.name }}</h5>
             <div class="card-text">{{ this.price }}</div>
@@ -27,6 +27,9 @@ export default{
             },
             price: function(){
                 return this.product.price
+            },
+            imagesource: function(){
+                return this.product.imgsrc
             }
         },
 

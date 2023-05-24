@@ -1,27 +1,38 @@
 [
     {
         "id": 3,
-        "name": "Amazon Echo, Black",
-        "price": "11729.99"
+        "name": "Bitcoin",
+        "price": "14389.99",
+        "imgsrc": "./src/assets/img/bitcoin.png"
     },
     {
         "id": 4,
-        "name": "Fire Tablet, 7",
-        "price": "11627.49"
+        "name": "Doge Coin, 7",
+        "price": "14287.49",
+        "imgsrc": "./src/assets/img/dogue.png"
     },
     {
         "id": 5,
-        "name": "Paperwhitefff",
-        "price": "11684.99"
+        "name": "Ethereum",
+        "price": "14344.99",
+        "imgsrc": "./src/assets/img/ethereum.png"
     },
     {
         "id": 1,
-        "name": "Fire Thing",
-        "price": "11612.99"
+        "name": "Cardano",
+        "price": "14272.99",
+        "imgsrc": "./src/assets/img/cardano.png"
     },
     {
         "id": 2,
-        "name": "Amazon Echo Dot",
-        "price": "11629.99"
+        "name": "Solana",
+        "price": "14289.99",
+        "imgsrc": "./src/assets/img/solana.png"
+    },
+    {
+        "id": 6,
+        "name": "Litecoin",
+        "price": "14289.99",
+        "imgsrc": "./src/assets/img/litecoin.png"
     }
 ]
