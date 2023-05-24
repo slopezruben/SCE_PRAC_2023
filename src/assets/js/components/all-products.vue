@@ -2,7 +2,6 @@
     <div id="all-products">
         <navigationBar @searchedProducts="searchProducts($event)" :cartList="this.cartList"></navigationBar>
         <h1>All Products</h1>
-        <p><router-link :to="{ name: 'create_product' }" class="btn btn-primary">Create Product</router-link></p>
         <div class="container">
             <div class="row row-cols-xs-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 ">
                     <div v-for="product in products" :key="product.id" class="text-center mb-3 mt-2 ">
