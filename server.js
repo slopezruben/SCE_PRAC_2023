@@ -15,6 +15,18 @@ app.use('/', express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+function cambiarValorPorcentaje(numero) {
+	var random_sign = Math.random();
+	var random_value = 20 * Math.random();
+	var change = numero*random_value / 100
+	if (random_sign < 0.5) {
+		var new_value = numero - change
+	}else{
+		var new_value = numero + change
+	}
+	return Math.max(1,new_value)
+}
+
 setInterval(function() {
     fs.readFile(PRODUCTS_FILE, function(err,data,products){
         if (err){
@@ -24,7 +36,9 @@ setInterval(function() {
         products = JSON.parse(data);
         for(var i = 0; i < products.length; i++)
         {
-           products[i]['price'] = (20 + parseFloat(products[i]['price'])).toFixed(2).toString()
+		products[i]['price'] = cambiarValorPorcentaje(parseFloat(products[i]['price'])).toFixed(2).toString()
+		
+		//products[i]['price'] = (20 + parseFloat(products[i]['price'])).toFixed(2).toString()
         }
 
         fs.writeFile(PRODUCTS_FILE, JSON.stringify(products, null, 4), function(err) {

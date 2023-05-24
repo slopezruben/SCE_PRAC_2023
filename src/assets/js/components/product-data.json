@@ -2,37 +2,37 @@
     {
         "id": 3,
         "name": "Bitcoin",
-        "price": "14389.99",
+        "price": "8830.38",
         "imgsrc": "./src/assets/img/bitcoin.png"
     },
     {
         "id": 4,
         "name": "Doge Coin, 7",
-        "price": "14287.49",
+        "price": "13072.54",
         "imgsrc": "./src/assets/img/dogue.png"
     },
     {
         "id": 5,
         "name": "Ethereum",
-        "price": "14344.99",
+        "price": "13574.67",
         "imgsrc": "./src/assets/img/ethereum.png"
     },
     {
         "id": 1,
         "name": "Cardano",
-        "price": "14272.99",
+        "price": "19169.88",
         "imgsrc": "./src/assets/img/cardano.png"
     },
     {
         "id": 2,
         "name": "Solana",
-        "price": "14289.99",
+        "price": "12933.24",
         "imgsrc": "./src/assets/img/solana.png"
     },
     {
         "id": 6,
         "name": "Litecoin",
-        "price": "14289.99",
+        "price": "9039.71",
         "imgsrc": "./src/assets/img/litecoin.png"
     }
 ]
