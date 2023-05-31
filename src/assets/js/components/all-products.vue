@@ -52,10 +52,6 @@
                     this.products = this.originalProducts;
                     return;
                 }
-                //Va igual de rapido y no reregenera casillas
-                //this.products= this.products.filter((product) => product.name.toLowerCase().includes(this.productSearch.toLowerCase()));
-            
-                            
                 var searchedProducts = [];
                 for(var i = 0; i < this.originalProducts.length; i++)
                 {

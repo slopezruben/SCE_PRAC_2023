@@ -36,11 +36,8 @@ setInterval(function() {
         products = JSON.parse(data);
         for(var i = 0; i < products.length; i++)
         {
-		products[i]['price'] = cambiarValorPorcentaje(parseFloat(products[i]['price'])).toFixed(2).toString()
-		
-		//products[i]['price'] = (20 + parseFloat(products[i]['price'])).toFixed(2).toString()
+		    products[i]['price'] = cambiarValorPorcentaje(parseFloat(products[i]['price'])).toFixed(2).toString()
         }
-
         fs.writeFile(PRODUCTS_FILE, JSON.stringify(products, null, 4), function(err) {
         if (err) {
             console.error(err);
@@ -49,7 +46,8 @@ setInterval(function() {
         }); 
     });
     }, 15000);
-//
+
+
 // Additional middleware which will set headers that we need on each request.
 app.use(function(req, res, next) {
     // Set permissive CORS header - this allows this server to be used only as
@@ -247,16 +245,13 @@ paypal.configure({
     'client_id': 'AV8MPmd1b80NBdLxK32A86bO1vY-GxKk8Nqzgi0CYPeTuJ8SI3FCzks53EfX2hDvWOg0K4gMqLvD80GV',
     'client_secret': ''
   });
-  
-  // start payment process
-  //Comanda per generar el que vull comprar (peticio per comprar a paypal)
   app.post('/checkout' , (req , res) => {
       console.log(req.body);
       var execute_payment_json = {
         "payer_id": req.body.data.payerID,
       };
       const payment = {};
-      payment.amount = req.body.data.amount; //Aqui hauriem de fer que rebi la llista de id dels prod i agafar de la BD els preus i els gestoina per fer el preu total
+      payment.amount = req.body.data.amount; 
       const paymentID = req.body.data.paymentID;
       paymentPaypal(paymentID, execute_payment_json, payment,(err, result) => {
           if(err) {
@@ -268,8 +263,6 @@ paypal.configure({
   });
   
   
-  // helper functions
-  //Crida al backend de paypal (com una promise)
   var paymentPaypal = (paymentID, execute_payment_json, payment, cb) => {
       paypal.payment.execute(paymentID, execute_payment_json,(error, paymentLog) => {
           if (error)
@@ -278,8 +271,6 @@ paypal.configure({
           }
           else
           {
-              // the server logic after successful payment
-              // here just print out the payment information to the console
               payment.email = paymentLog.payer.payer_info.email;
               payment.first_name = paymentLog.payer.payer_info.first_name;
               payment.last_name = paymentLog.payer.payer_info.last_name;

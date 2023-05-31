@@ -23,9 +23,9 @@ export default {
         }
     },
     methods:{
-        sendDataPaypal (creds) { //promise -> post contra el server
-            return new Promise((resolve, reject) => { //axios es per enviar crides al server
-              axios.post('http://localhost:3000/checkout', creds).then(res => { //aqui enviarem els credencials i el amount
+        sendDataPaypal (creds) { 
+            return new Promise((resolve, reject) => { 
+              axios.post('http://localhost:3000/checkout', creds).then(res => { 
                   return resolve()
               }).catch((err) => {
                   return reject(err)
@@ -39,7 +39,6 @@ export default {
            }
            console.log(typeof(this.amount))
            let  payment = (data, actions) => {
-                // Make a call to the REST api to create the payment
                 return actions.payment.create({
                     payment: {
                         transactions: [
