@@ -260,7 +260,7 @@ paypal.configure({
       const paymentID = req.body.data.paymentID;
       paymentPaypal(paymentID, execute_payment_json, payment,(err, result) => {
           if(err) {
-            res.statuts(400).json(JSON.stringify(err));
+            res.status(400).json(JSON.stringify(err));
           } else {
             res.status(200).json(payment);
           }
